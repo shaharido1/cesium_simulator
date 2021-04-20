@@ -82,7 +82,7 @@ class Simulator {
         } else {
             const ouput = process.env.CREATE_VIDEO ? "./screenshots/output.mp4" :
                 process.env.UDP_ADDRESS ? process.env.UDP_ADDRESS
-                    : "udp://239.255.42.41:30120";
+                    : "udp://239.255.42.41:30123";
             return ["-y", "-i", "-", "-c:v", "libx264", "-f", "mpegts", ouput]
         }
 
