@@ -41,8 +41,11 @@ class Simulator {
         try {
             console.log('lunch options', options)
             this.browser = await launch(options);
+            console.log('browser lunched, navigating to page')
             this.page = await this.browser.newPage();
+            console.log('open new page');
             await this.page.goto(this.localAddress);
+            console.log('navigated to ', this.localAddress)
         } catch (e) {
             console.log('error starting browser', e)
         }
