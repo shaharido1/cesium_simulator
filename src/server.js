@@ -7,7 +7,7 @@ const Simulator = require('./simulator');
 const Cesium_manipulation = require('./cesium_manipulation');
 const simulator = new Simulator(port);
 const cesium_manipulation = new Cesium_manipulation();
-
+console.log('starting server....')
 app.use(express.static('public')); /* this line tells Express to use the public folder as our static folder from which we can serve static files*/
 app.use(bodyParser.json({limit: '10mb'}));
 app.use(express.urlencoded({extended: false}));

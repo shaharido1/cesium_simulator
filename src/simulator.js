@@ -26,7 +26,6 @@ class Simulator {
         const options = {
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
             headless: true,
-            executablePath: 'google-chrome-stable',
             // browserWSEndpoint: process.env.browserWSEndpoint || undefined,
             defaultViewport: {
                 width,
