@@ -27,7 +27,7 @@ class Simulator {
             this.browser = await launch({
                 args: ['--no-sandbox', '--disable-setuid-sandbox'],
                 headless: true,
-                browserWSEndpoint: process.env.browserWSEndpoint || undefined,
+                // browserWSEndpoint: process.env.browserWSEndpoint || undefined,
                 defaultViewport: {
                     width,
                     height,
@@ -36,7 +36,7 @@ class Simulator {
             this.page = await this.browser.newPage();
             await this.page.goto(this.localAddress);
         } catch (e) {
-
+            console.log('error starting browser', e)
         }
 
     }
@@ -44,7 +44,6 @@ class Simulator {
 
     initFalseView(width = this.width, height = this.height) {
         return new Promise((resolve, reject) => {
-
             const xvfb = new Xvfb({
                 silent: true,
                 xvfb_args: ["-screen", "0", `${width}x${height}x24`, "-ac"],
