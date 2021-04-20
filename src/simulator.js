@@ -23,16 +23,24 @@ class Simulator {
 
 
     async initPage(width = this.width, height = this.height) {
+        const options = {
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            headless: true,
+            executablePath: pro'google-chrome-stable',
+            // browserWSEndpoint: process.env.browserWSEndpoint || undefined,
+            defaultViewport: {
+                width,
+                height,
+            }
+        }
+        if (process.env.chromePath) {
+            options.executablePath = process.env.chromePath
+        }
+        if (process.env.browserWSEndpoint) {
+            options.browserWSEndpoint = process.env.browserWSEndpoint
+        }
         try {
-            this.browser = await launch({
-                args: ['--no-sandbox', '--disable-setuid-sandbox'],
-                headless: true,
-                // browserWSEndpoint: process.env.browserWSEndpoint || undefined,
-                defaultViewport: {
-                    width,
-                    height,
-                }
-            });
+            this.browser = await launch(options);
             this.page = await this.browser.newPage();
             await this.page.goto(this.localAddress);
         } catch (e) {
