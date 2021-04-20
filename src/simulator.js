@@ -81,9 +81,9 @@ class Simulator {
         let ffmpeg = spawn("ffmpeg", ffmpegParams, {
             stdio: ["pipe", process.stdout, process.stderr]
         });
-        const file = fs.createWriteStream(__dirname + "/test.mp4");
-        stream.pipe(file)
-        // stream.pipe(ffmpeg.stdin)
+        // const file = fs.createWriteStream(__dirname + "/test.mp4");
+        // stream.pipe(file)
+        stream.pipe(ffmpeg.stdin)
     }
 
     resolveFFMPEGParams() {
@@ -93,7 +93,11 @@ class Simulator {
             const ouput = process.env.CREATE_VIDEO ? "./screenshots/output.mp4" :
                 process.env.UDP_ADDRESS ? process.env.UDP_ADDRESS
                     : "udp://239.255.42.41:30123";
-            return ["-y", "-i", "-", "-c:v", "libx264", "-f", "mpegts", ouput]
+            return ["-y", "-i", "-",
+                "-c:v", "libx264",
+                // "-c", "copy", "-map", "0",
+                // "-tune", "zerolatency", "-preset", "ultrafast",
+                "-f", "mpegts", ouput]
         }
 
     }
