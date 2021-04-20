@@ -32,13 +32,14 @@ class Simulator {
                 height,
             }
         }
-        if (process.env.chromePath) {
-            options.executablePath = process.env.chromePath
+        if (process.env.executablePath) {
+            options.executablePath = process.env.executablePath
         }
         if (process.env.browserWSEndpoint) {
             options.browserWSEndpoint = process.env.browserWSEndpoint
         }
         try {
+            console.log('lunch options', options)
             this.browser = await launch(options);
             this.page = await this.browser.newPage();
             await this.page.goto(this.localAddress);
